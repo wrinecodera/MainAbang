@@ -9,7 +9,7 @@ import {ViewController} from 'ionic-angular';
   templateUrl: 'filter.html',
 })
 export class FilterPage {
-
+  
   constructor(private viewCtrl: ViewController) {
   }
 
