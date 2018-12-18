@@ -25674,13 +25674,18 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+page-filter .btn {
+  posiiton: fixed;
+  overflow: hidden;
+}
+
 page-home .bg {
   background: -webkit-gradient(linear, left top, left bottom, from(#42f4b0), to(#fff));
   background: linear-gradient(to bottom, #42f4b0 0%, #fff 100%);
 }
 
 page-home .grid {
-  margin-top: 60vh;
+  margin-top: 30vh;
 }
 
 .btn {
