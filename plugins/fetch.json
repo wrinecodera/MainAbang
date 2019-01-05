@@ -1,0 +1,10 @@
+{
+  "cordova-plugin-googlemaps": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-googlemaps@2.4.6"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}

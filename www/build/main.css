@@ -25694,17 +25694,37 @@ page-home .grid {
   margin-right: auto;
 }
 
+.img {
+  width: 70%;
+  height: auto;
+}
+
 page-user1 agm-map {
   height: 100%;
   margin: 0px;
   padding: 0px;
-  position: relevant;
-  z-index: 999;
+  position: relative;
+  z-index: 1;
 }
 
 page-user1 ion-searchbar {
   width: 100%;
-  margin: 0 auto;
+  position: relative;
+  z-index: 11;
+  padding: 8px;
+}
+
+page-user1 .btn2 {
+  width: 35%;
+  position: absolute;
+  margin-left: 8px;
+}
+
+page-user1 .grid-overlay {
   position: absolute;
   z-index: 11;
+}
+
+page-user1 .grid {
+  padding: -5px;
 }
