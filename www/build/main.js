@@ -78,7 +78,7 @@ var HomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"C:\Users\user\Desktop\abang\src\pages\home\home.html"*/'\n<ion-header>\n\n  \n\n</ion-header>\n\n\n<ion-content padding class="bg">\n     \n     <ion-row>\n          <ion-col> </ion-col>\n          <ion-col col-6>\n          </ion-col>\n          <ion-col></ion-col>\n     </ion-row>    \n     <ion-row>\n          <ion-col> </ion-col>\n          <ion-col col-6>\n          <img src="../../assets/imgs/2000px-House.svg.png" alt="ikwhdiwd">\n\n          </ion-col>\n          <ion-col></ion-col>\n     </ion-row>    \n        \n\n\n          <ion-grid class="margin-user"  >\n              \n              \n               \n               <ion-row  >\n                       \n              <ion-col col-12 >  \n                   <button   ion-button round outline class=\'btn\' (click)="onGoToUser1()">I\'m just browsing.</button>\n              </ion-col>\n      \n                        \n              </ion-row>\n\n              <ion-row >\n                         \n                <ion-col col-12> \n                     <button  ion-button round outline class=\'btn\'(click)="onGoToUsers2()">I\'m a bhouse owner.</button>\n                    \n                </ion-col>    \n                          \n               </ion-row>\n          \n              </ion-grid>\n     \n     \n      \n          \n  \n</ion-content>\n\n   \n  \n  \n\n\n'/*ion-inline-end:"C:\Users\user\Desktop\abang\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]])
     ], HomePage);
     return HomePage;
 }());
@@ -119,11 +119,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //   Marker
 // } from '@ionic-native/google-maps';
 var User1Page = /** @class */ (function () {
-    function User1Page(modalCtrl, platform, geolocation, alerCtrl) {
+    function User1Page(modalCtrl, platform, geolocation, alerCtrl, loadingCtrl, toastCtrl) {
         this.modalCtrl = modalCtrl;
         this.platform = platform;
         this.geolocation = geolocation;
         this.alerCtrl = alerCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.toastCtrl = toastCtrl;
         this.lat = 36.7783;
         this.lng = 119.4179;
         // platform.ready().then(() => {
@@ -141,21 +143,36 @@ var User1Page = /** @class */ (function () {
     User1Page.prototype.doConfirm = function () {
         var _this = this;
         var confirm = this.alerCtrl.create({
-            title: 'Location Confirmation?',
-            message: 'Do you agree to locate your current location?',
+            title: "Location Confirmation?",
+            message: "Do you agree to locate your current location?",
             buttons: [
                 {
-                    text: 'Disagree',
+                    text: "Disagree",
                     handler: function () {
-                        console.log('Disagree clicked');
+                        console.log("Disagree clicked");
                     }
                 },
                 {
-                    text: 'Agree',
+                    text: "Agree",
                     handler: function () {
-                        _this.geolocation.getCurrentPosition().then(function (pos) {
+                        var loader = _this.loadingCtrl.create({
+                            content: "Getting your location..."
+                        });
+                        loader.present();
+                        _this.geolocation
+                            .getCurrentPosition()
+                            .then(function (pos) {
+                            loader.dismiss();
                             _this.lat = pos.coords.latitude;
                             _this.lng = pos.coords.longitude;
+                        })
+                            .catch(function (error) {
+                            loader.dismiss();
+                            var toast = _this.toastCtrl.create({
+                                message: "Could get location, please pick it manually!",
+                                duration: 2500
+                            });
+                            toast.present();
                         });
                     }
                 }
@@ -164,17 +181,22 @@ var User1Page = /** @class */ (function () {
         confirm.present();
     };
     User1Page.prototype.onGoToFilter = function () {
-        var modalPage = this.modalCtrl.create('FilterPage', {}, {
-            enterAnimation: 'modal-translate-up-enter',
-            leaveAnimation: 'modal-translate-up-leave'
+        var modalPage = this.modalCtrl.create("FilterPage", {}, {
+            enterAnimation: "modal-translate-up-enter",
+            leaveAnimation: "modal-translate-up-leave"
         });
         modalPage.present();
     };
     User1Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-user1',template:/*ion-inline-start:"C:\Users\user\Desktop\abang\src\pages\user1\user1.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-buttons end> <button ion-button (click)="onGoToFilter()" clear>Filter</button></ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n  <ion-grid class="grid-overlay">\n\n\n    <ion-row>\n      <ion-col>\n        <ion-searchbar class="search">\n        </ion-searchbar>\n        <button ion-button color="secondary" block class=\'btn2\' (click)="doConfirm()">\n          <ion-icon name="locate">\n          </ion-icon> Locate mee\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n\n\n\n  <agm-map [latitude]=\'lat\' [longitude]=\'lng\' [zoom]="16">\n    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>\n  </agm-map>\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\user\Desktop\abang\src\pages\user1\user1.html"*/,
+            selector: "page-user1",template:/*ion-inline-start:"C:\Users\user\Desktop\abang\src\pages\user1\user1.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-buttons end>\n      <button ion-button (click)="onGoToFilter()" clear>\n        Filter\n      </button></ion-buttons\n    >\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid class="grid-overlay">\n    <ion-row>\n      <ion-col>\n        <ion-searchbar class="search"> </ion-searchbar>\n        <button\n          ion-button\n          color="secondary"\n          block\n          class="btn2"\n          (click)="doConfirm()"\n        >\n          <ion-icon name="locate"> </ion-icon> Locate mee\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="14">\n    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>\n  </agm-map>\n</ion-content>\n'/*ion-inline-end:"C:\Users\user\Desktop\abang\src\pages\user1\user1.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ToastController */]])
     ], User1Page);
     return User1Page;
 }());
@@ -213,7 +235,7 @@ var User2Page = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-user2',template:/*ion-inline-start:"C:\Users\user\Desktop\abang\src\pages\user2\user2.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>user2</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\user\Desktop\abang\src\pages\user2\user2.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
     ], User2Page);
     return User2Page;
 }());
@@ -363,7 +385,7 @@ var MyApp = /** @class */ (function () {
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\user\Desktop\abang\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\user\Desktop\abang\src\app\app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
     return MyApp;
 }());
@@ -407,7 +429,7 @@ var ModalTranslateEnterTransition = /** @class */ (function (_super) {
             .add(wrapper);
     };
     return ModalTranslateEnterTransition;
-}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* PageTransition */]));
+}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["l" /* PageTransition */]));
 
 //# sourceMappingURL=on-enter-translate.transition.js.map
 
@@ -451,7 +473,7 @@ var ModalTranslateLeaveTransition = /** @class */ (function (_super) {
             .add(wrapper);
     };
     return ModalTranslateLeaveTransition;
-}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* PageTransition */]));
+}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["l" /* PageTransition */]));
 
 //# sourceMappingURL=on-leave-translate.transition.js.map
 
