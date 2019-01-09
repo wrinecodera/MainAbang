@@ -1,32 +1,20 @@
-<ion-header>
-  <ion-navbar>
-    <ion-buttons end>
-      <button ion-button (click)="onGoToFilter()" clear>
-        Filter
-      </button></ion-buttons
-    >
-  </ion-navbar>
-</ion-header>
+<ion-content class="card-background-page">
+  <ion-searchbar class="search"> </ion-searchbar>
 
-<ion-content>
-  <ion-grid class="grid-overlay">
-    <ion-row>
-      <ion-col>
-        <ion-searchbar class="search"> </ion-searchbar>
-        <button
-          ion-button
-          color="secondary"
-          block
-          class="btn2"
-          (click)="doConfirm()"
-        >
-          <ion-icon name="locate"> </ion-icon> Locate mee
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-card>
+    <a (click)="lapulapu()">
+      <img src="../../assets/imgs/card-saopaolo.png" />
+    </a>
 
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="14">
-    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-  </agm-map>
+    <div class="card-title" (click)="lapulapu()">Lapu-lapu</div>
+  </ion-card>
+  <ion-card>
+    <a (click)="Cebu()"> <img src="../../assets/imgs/card-amsterdam.png"/></a>
+    <div class="card-title" (click)="Cebu()">Cebu City</div>
+  </ion-card>
+
+  <ion-card>
+    <a (click)="Mandaue()"> <img src="../../assets/imgs/card-sf.png"/></a>
+    <div class="card-title" (click)="Mandaue()">Mandaue City</div>
+  </ion-card>
 </ion-content>

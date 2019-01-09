@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>listandmap1</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="onGoToFilter()" clear>
+        Filter
+      </button></ion-buttons
+    ></ion-navbar
+  >
+</ion-header>
+
+<ion-content padding>
+  <ion-tabs tabs-only tabsLayout="icon-start" color="primary">
+    <ion-tab
+      tabTitle="List"
+      tabIcon="list"
+      [root]="tab1List"
+      tabBadge="1"
+      tabBadgeStyle="secondary"
+    ></ion-tab>
+
+    <ion-tab tabTitle="Map" tabIcon="map" [root]="tab2Map"></ion-tab>
+  </ion-tabs>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs tabs-only tabsLayout="icon-start">
+      <ion-tab tabIcon="search" [root]="tab1List"></ion-tab>
+
+      <ion-tab tabIcon="contact" [root]="tab2Map"></ion-tab>
+      <ion-tab tabIcon="more" [root]="tab2Map"></ion-tab>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

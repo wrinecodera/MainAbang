@@ -1,38 +1,33 @@
 page-user1 {
-agm-map{ height: 100%;
-    margin: 0px;
-    padding: 0px;
-    position: relative;
-    z-index:1;
-}
+  .card-background-page {
+    ion-searchbar {
+      width: 100%;
+      position: relative;
+      z-index: 111 !important;
+    }
 
+    .card-title {
+      position: absolute;
+      top: 36%;
+      font-size: 2em;
+      width: 100%;
+      font-weight: bold;
+      color: #fff;
+    }
 
-ion-searchbar {
-    width: 100%;
-    position: relative;
-    z-index:11; 
-    padding:8px;
-
-}
-    
-.btn2
-{
-    width: 35%;
-   
-   position: absolute;
-   margin-left: 8px;
-
-}
-.grid-overlay{
-    position: absolute;
-    z-index:11;  
-  
-}
-.grid{
-    padding:-5px;
-}
-
-
-
-
+    .card-subtitle {
+      font-size: 1em;
+      position: absolute;
+      top: 52%;
+      width: 100%;
+      color: #fff;
+    }
+    ion-card {
+      position: relative;
+      z-index: 1 !important;
+      width: 100%;
+      margin: 0px;
+      text-align: center;
+    }
+  }
 }

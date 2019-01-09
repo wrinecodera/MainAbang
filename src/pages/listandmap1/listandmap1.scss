@@ -1,0 +1,20 @@
+page-user2 {
+  ion-tabs {
+    margin-bottom: 20px;
+  }
+
+  ion-tabs .tabbar {
+    position: relative;
+    top: auto;
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+  }
+  .tabs-ios .tab-button-icon {
+    margin: 0px;
+  }
+  [tabsLayout="icon-left"] .tab-button .tab-button-icon,
+  [tabsLayout="icon-start"] .tab-button .tab-button-icon {
+    padding-right: 4px;
+  }
+}
